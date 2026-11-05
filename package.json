@@ -25,7 +25,7 @@
     "link:skills": "npm run validate && bash scripts/link-skills.sh",
     "sync:version": "node scripts/sync-plugin-version.mjs",
     "validate": "node scripts/validate.mjs",
-    "test": "node --test",
+    "test": "node --test && node scripts/run-atlas-tests.mjs",
     "check": "npm run validate && npm test"
   },
   "devDependencies": {

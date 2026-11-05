@@ -2,57 +2,96 @@
 
 My personal agent skills for building production-grade software, from idea to release.
 
-I'm putting together the workflows I want my coding agents to follow: planning features, writing code, testing it, reviewing changes, and shipping. Small, focused skills I can use across projects and agents without repeating the same instructions every time.
+I want my coding agents to help me build the whole feature—not just write code that looks right. Understand the problem, question assumptions, implement the actual user journey, test the failure paths, and review what shipped against what was asked for.
 
-This is where I'll maintain them. I've reserved folders for `plan`, `implement`, `test`, `review`, and `ship`, but they're empty for now. **No usable skills yet—just the foundation.**
+These are the workflows I'm taking from project to project. Use the skills that fit the task, with the coding agent and tools you already use.
+
+## Skills
+
+| Skill | When to use it | Outcome |
+| --- | --- | --- |
+| [`oss-reuse-atlas`](skills/oss-reuse-atlas/SKILL.md) | Starting a software project, researching alternatives, or looking for code and product references | An evidence-backed catalog of comparable open-source applications and reusable modules, with commit-pinned implementation dossiers, license checks, and reuse decisions. **Research only: no implementation plan.** |
+| [`feature-discovery`](skills/feature-discovery/SKILL.md) | Before implementing a substantial feature, integration, or product workflow | A validated user journey, capability/compatibility matrix, source-backed requirements, justified constraints, and measurable acceptance criteria. |
+| [`production-vertical-slice`](skills/production-vertical-slice/SKILL.md) | Building an accepted feature across frontend, API, state, workers, external services, or other relevant boundaries | A functional end-to-end user journey, tests for success and failure, and accurate verification evidence. |
+| [`adversarial-acceptance`](skills/adversarial-acceptance/SKILL.md) | After feature implementation or when a feature passes tests but still feels incomplete | An independent review that challenges the scope, compatibility, behavior, recovery, security, UX, and claims of production readiness. |
+
+The goal isn't more process for every small change. It's giving the agent the right discipline when a task needs it, while keeping me in control of scope and decisions. Each skill includes its own instructions and resources; sibling skills are optional, not requirements.
 
 ## Install
 
-Once I've added skills, you can install them with the [skills CLI](https://skills.sh):
+Install with the [skills CLI](https://skills.sh):
 
 ```bash
 npx skills@latest add mugiwaraluffy56/skills
 ```
 
-Pick the skills and coding agents you want during setup. It supports Claude Code, Codex, OpenCode, Cursor, and other agents.
+Choose which skills and coding agents to install. For **global availability across projects** for the selected agent(s):
 
 ```bash
-# Make them available across your projects for the agents you select
 npx skills@latest add mugiwaraluffy56/skills -g
-
-# See what's available without installing
-npx skills@latest add mugiwaraluffy56/skills --list
-
-# Install one skill for OpenCode
-npx skills@latest add mugiwaraluffy56/skills --skill SKILL-NAME -a opencode
 ```
 
-The CLI needs Node.js 22.20+. The catalog is empty right now, so there's nothing to install yet.
+List available skills without installing:
+
+```bash
+npx skills@latest add mugiwaraluffy56/skills --list
+```
+
+Install an individual skill for a specific agent (example: OpenCode):
+
+```bash
+npx skills@latest add mugiwaraluffy56/skills --skill oss-reuse-atlas -a opencode -g
+```
+
+The installer requires Node.js 22.20+. The skills aren't tied to JavaScript: they guide the agent through your project's languages and tools. Global installation makes a skill available across projects; it doesn't automatically run it. Ask your agent to use the skill when you need it.
 
 ### Claude Code plugin
 
-If you prefer plugins, run these inside Claude Code:
+Inside Claude Code:
 
 ```text
 /plugin marketplace add mugiwaraluffy56/skills
 /plugin install personal-skills@personal-skills
 ```
 
-Use either the plugin or the skills CLI for Claude Code, not both, so you don't end up with duplicates. The plugin name is `personal-skills`; the GitHub repository is `skills`.
+Avoid installing the same collection through both plugin and skills CLI for Claude Code unless you intentionally want duplicated discovery.
 
 ### From a local checkout
-
-After adding a skill, run this from the project where you want to use it:
 
 ```bash
 npx skills@latest add /absolute/path/to/skills
 ```
 
-For local Claude Code plugin development, run `claude --plugin-dir .` from this repository. Restart your agent if new skills don't show up.
+Restart your agent if newly installed skills don't appear.
+
+## Usage
+
+Start a new project with a **research-only** reference collection:
+
+```text
+Use oss-reuse-atlas to find a broad, evidence-backed library of open-source
+applications like this project and related reusable implementations. Pin source
+revisions, inspect actual code/tests and licenses, and record precise reuse
+options. Do not create an implementation plan, milestones, tickets, or code.
+```
+
+Before and after implementing a feature:
+
+```text
+Use feature-discovery to investigate the full user journey, official API
+capabilities, representative open-source implementations, compatibility,
+edge cases, and justified constraints. Use production-vertical-slice to build
+the accepted feature with real end-to-end behavior. Finally, use
+adversarial-acceptance to challenge the result against my original request.
+```
+
+Bring the actual context: the problem, relevant code, constraints, and what you expect to work. Invocation details vary by agent; some also expose skills as slash commands. You can use each skill separately, not just in the sequence above.
+
+The research skill includes a standard-library helper requiring Python 3.10+ when you run its structural validation. It checks artifact structure, not the truth of upstream claims or legal permission to reuse code.
+
+Installing a skill doesn't connect external services, grant permissions, or prove a feature is production-ready. Those still need explicit setup, authorization, and evidence.
 
 ## Update or remove
-
-For skills installed through the CLI:
 
 ```bash
 npx skills@latest check
@@ -60,54 +99,7 @@ npx skills@latest update
 npx skills@latest remove
 ```
 
-Check the prompts—these commands can include skills from other repositories too. For the Claude Code plugin, use `/plugin` to manage updates or uninstall it.
-
-## How I'm organizing this
-
-Each skill will live in `skills/<name>/SKILL.md`, with its own supporting resources when needed. I'm using the standard [Agent Skills](https://agentskills.io) format rather than building a custom installer or runtime.
-
-```text
-skills/             Empty placeholders for plan, implement, test, review, and ship
-.changeset/         Version and changelog entries
-.claude-plugin/     Claude Code plugin and marketplace metadata
-.github/workflows/  CI checks
-docs/               Authoring and publishing notes
-scripts/            Repository validation
-tests/              Tests for the validator
-AGENTS.md           Shared instructions for agents working in this repo
-CLAUDE.md           Loads the shared instructions for Claude Code
-GLOSSARY.md         Shared terminology
-```
-
-## Working on the repo
-
-```bash
-npm ci
-npm run check
-```
-
-The tooling needs Node.js 22.20+. You don't need to install this repository's npm dependencies just to use its skills.
-
-More details: [authoring](docs/authoring.md), [publishing](docs/publishing.md), and [contributing](CONTRIBUTING.md).
-
-### Maintainer scripts
-
-I've adapted a few helpers from [Matt Pocock's skills](https://github.com/mattpocock/skills):
-
-```bash
-npm run list:skills    # List skill entry points
-npm run sync:version   # Copy the package version into plugin metadata
-npm run link:skills    # Link this checkout's skills into local agent directories
-npm run changeset     # Record a change for the next release
-```
-
-The linker is for local development, not a replacement for the installer. It links into `~/.claude/skills` and `~/.agents/skills` only, refuses to overwrite existing installations, and does nothing while the collection is empty. It needs Bash and Node.js; on Windows, use Git Bash or WSL. Symlink support is required. Linked skills follow edits in this checkout automatically. To unlink one, remove only its symlink from those directories, not the source skill.
-
-The helper scripts and release setup are adapted from Matt Pocock's repo under the [MIT license](LICENSE).
-
-### Releases
-
-I'm using Changesets to track release notes and versions. Changes pushed to `main` with a changeset produce a version PR; merging it lets the release workflow create a Git tag. Nothing is published to npm. Setup requirements and manual steps are in [publishing](docs/publishing.md).
+Review prompts because these commands may include skills from other collections. For plugin installations, manage updates and removal through Claude Code's `/plugin` menu.
 
 ## License
 
