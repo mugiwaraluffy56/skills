@@ -1,0 +1,42 @@
+name: Bug report
+description: Report a problem with a skill, installation, or repository tooling.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for reporting a problem. Please leave out credentials, private code, and other sensitive information.
+  - type: input
+    id: affected
+    attributes:
+      label: Affected skill or component
+      description: A skill name, installation method, or repository tool.
+      placeholder: Skill name, skills CLI, Claude Code plugin, or validator
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include your coding agent and version, operating system, install method, and collection version or commit if known. Include Node.js version for CLI or tooling issues.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Include the command or prompt you used and the smallest reproducible example.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Include relevant errors or screenshots. Redact sensitive information.
+    validations:
+      required: true

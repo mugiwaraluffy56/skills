@@ -54,6 +54,8 @@ export async function validateRepository(directory) {
     if (!entry.isDirectory()) throw new Error(`Unexpected skills/ entry: ${entry.name}`);
     const skillDirectory = join(directory, 'skills', entry.name);
     const entries = await readdir(skillDirectory, { withFileTypes: true });
+    // Explicit empty placeholders are not installable skills.
+    if (slug.test(entry.name) && entry.name.length <= 64 && entries.length === 1 && entries[0].name === '.gitkeep' && entries[0].isFile()) continue;
     const skillFile = entries.find((item) => item.name === 'SKILL.md');
     if (!skillFile?.isFile()) throw new Error(`${entry.name} must contain a regular SKILL.md file`);
     const metadata = validateSkill(await readFile(join(skillDirectory, 'SKILL.md'), 'utf8'), basename(skillDirectory));

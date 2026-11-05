@@ -23,13 +23,19 @@ Publishing the empty scaffold is fine, but skill discovery will return no skills
 
 ## Releases
 
-After testing newly added or changed skills:
+For user-visible changes, run `npm run changeset` and commit the generated entry with the change. Select `personal-skills-tooling` even though the repository is not an npm-distributed package.
 
-1. Update `CHANGELOG.md`.
-2. Bump the version in both `package.json` and `.claude-plugin/plugin.json`.
-3. Run `npm install --package-lock-only` to sync the lockfile.
-4. Run `npm run check`, commit, and tag the version (for example `v0.1.1`).
-5. Push the commit and tag; optionally create a GitHub release.
+On `main`, the release workflow opens or updates a version PR. Its version command consumes changesets, updates the changelog and package version, syncs plugin metadata and the lockfile, then runs the checks. Review and merge that PR; the next run creates and pushes the version tag. No npm credentials are needed and nothing is published to npm.
+
+### GitHub setup
+
+In repository **Settings → Actions → General → Workflow permissions**, enable **Allow GitHub Actions to create and approve pull requests**. Organization policies may restrict this setting. The release job requests only repository contents and pull-request write permissions through `GITHUB_TOKEN`.
+
+PRs created with the default `GITHUB_TOKEN` do not trigger other workflows. The release job runs checks itself, but repositories requiring a separate PR check may need an approved GitHub App token to trigger that check, or a maintainer-run validation workflow. Do not bypass required checks to merge a release PR.
+
+### Manual fallback
+
+With pending changesets committed, run `npm run version:skills`, review and commit the generated changes, then push. Run `npm run release` to create a local tag and `git push origin --tags` to publish tags you have reviewed. Changesets tags this single-package repository as `v<version>`. Avoid mixing manual and automated release operations at the same time.
 
 For reproducible CLI installs, consumers can use a tag URL as the source:
 

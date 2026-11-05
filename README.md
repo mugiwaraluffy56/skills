@@ -4,7 +4,7 @@ My personal agent skills for building production-grade software, from idea to re
 
 I'm putting together the workflows I want my coding agents to follow: planning features, writing code, testing it, reviewing changes, and shipping. Small, focused skills I can use across projects and agents without repeating the same instructions every time.
 
-This is where I'll maintain them. **No skills added yet—just the foundation.**
+This is where I'll maintain them. I've reserved folders for `plan`, `implement`, `test`, `review`, and `ship`, but they're empty for now. **No usable skills yet—just the foundation.**
 
 ## Install
 
@@ -67,7 +67,8 @@ Check the prompts—these commands can include skills from other repositories to
 Each skill will live in `skills/<name>/SKILL.md`, with its own supporting resources when needed. I'm using the standard [Agent Skills](https://agentskills.io) format rather than building a custom installer or runtime.
 
 ```text
-skills/             The skills themselves (empty for now)
+skills/             Empty placeholders for plan, implement, test, review, and ship
+.changeset/         Version and changelog entries
 .claude-plugin/     Claude Code plugin and marketplace metadata
 .github/workflows/  CI checks
 docs/               Authoring and publishing notes
@@ -88,6 +89,25 @@ npm run check
 The tooling needs Node.js 22.20+. You don't need to install this repository's npm dependencies just to use its skills.
 
 More details: [authoring](docs/authoring.md), [publishing](docs/publishing.md), and [contributing](CONTRIBUTING.md).
+
+### Maintainer scripts
+
+I've adapted a few helpers from [Matt Pocock's skills](https://github.com/mattpocock/skills):
+
+```bash
+npm run list:skills    # List skill entry points
+npm run sync:version   # Copy the package version into plugin metadata
+npm run link:skills    # Link this checkout's skills into local agent directories
+npm run changeset     # Record a change for the next release
+```
+
+The linker is for local development, not a replacement for the installer. It links into `~/.claude/skills` and `~/.agents/skills` only, refuses to overwrite existing installations, and does nothing while the collection is empty. It needs Bash and Node.js; on Windows, use Git Bash or WSL. Symlink support is required. Linked skills follow edits in this checkout automatically. To unlink one, remove only its symlink from those directories, not the source skill.
+
+The helper scripts and release setup are adapted from Matt Pocock's repo under the [MIT license](LICENSE).
+
+### Releases
+
+I'm using Changesets to track release notes and versions. Changes pushed to `main` with a changeset produce a version PR; merging it lets the release workflow create a Git tag. Nothing is published to npm. Setup requirements and manual steps are in [publishing](docs/publishing.md).
 
 ## License
 

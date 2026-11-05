@@ -57,6 +57,15 @@ test('rejects version drift', async (t) => {
   await assert.rejects(validateRepository(directory), /versions differ/);
 });
 
+test('allows explicit empty placeholders without counting them as skills', async (t) => {
+  const directory = await fixture(t);
+  await mkdir(join(directory, 'skills/plan'));
+  await writeFile(join(directory, 'skills/plan/.gitkeep'), '');
+  assert.equal(await validateRepository(directory), 0);
+  await writeFile(join(directory, 'skills/plan/unfinished.md'), 'Draft');
+  await assert.rejects(validateRepository(directory), /regular SKILL.md/);
+});
+
 test('rejects skill directories without an entry point', async (t) => {
   const directory = await fixture(t);
   await mkdir(join(directory, 'skills/incomplete'));

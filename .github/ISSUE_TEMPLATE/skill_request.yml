@@ -1,0 +1,36 @@
+name: Skill or improvement request
+description: Suggest a new skill or an improvement to the collection.
+title: "[Request]: "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you trying to solve?
+      description: Describe the real workflow and what is missing today.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed skill or improvement
+      description: Describe what the agent should do and what a successful result looks like.
+    validations:
+      required: true
+  - type: textarea
+    id: trigger
+    attributes:
+      label: When would you use it?
+      description: Include example prompts or situations that should trigger the skill. For repository improvements, describe where the change belongs.
+    validations:
+      required: true
+  - type: input
+    id: agents
+    attributes:
+      label: Coding agents
+      description: Which agents should this work with?
+      placeholder: Claude Code, Codex, OpenCode, Cursor, etc.
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives and references
+      description: Optional workarounds, related skills, or links. Note the license if proposing third-party material.

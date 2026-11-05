@@ -2,6 +2,8 @@
 
 This repository distributes reusable agent skills, not an application. Keep the scaffold empty until the user explicitly requests adding or importing skills; examples in documentation are not permission to create sample skills.
 
+The user has requested empty `plan`, `implement`, `test`, `review`, and `ship` placeholders. Keep them as `.gitkeep`-only directories until their implementation is requested; they are not discoverable skills.
+
 ## Working rules
 
 - Use `GLOSSARY.md` for domain terminology; update it when a term's meaning changes.
