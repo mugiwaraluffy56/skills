@@ -1,0 +1,15 @@
+{
+  "name": "personal-skills-tooling",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Development tooling for a personal agent skills repository",
+  "license": "MIT",
+  "engines": { "node": ">=22.20.0" },
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "test": "node --test",
+    "check": "npm run validate && npm test"
+  },
+  "devDependencies": { "yaml": "^2.8.1" }
+}

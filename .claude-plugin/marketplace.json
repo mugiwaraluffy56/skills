@@ -1,0 +1,11 @@
+{
+  "name": "personal-skills",
+  "owner": { "name": "Puneeth Aditya Myakam" },
+  "plugins": [
+    {
+      "name": "personal-skills",
+      "source": "./",
+      "description": "A personal collection of reusable agent skills."
+    }
+  ]
+}
