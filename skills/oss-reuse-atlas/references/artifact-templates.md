@@ -28,7 +28,7 @@ These are **research data structures**, not a task/implementation plan. Save in 
 }
 ```
 
-For D2/D3, replace `pinned_commit` with a real full 40-character SHA verified at the repository, and `dossier` with a relative path like `dossiers/owner--repository.md`. Use exact revision-pinned file URLs in the dossier. Do not call D0/D1 "verified code."
+For D2/D3, replace `pinned_commit` with a real full 40-character SHA verified at the repository, and `dossier` with a portable relative path like `dossiers/owner--repository.md`. Dossiers and any symlink targets must stay inside the atlas's `dossiers/` directory. Include at least one exact `https://github.com/owner/repository/blob/FULL_SHA/path` citation matching the record's repository and SHA. The helper checks citation structure, not whether that SHA/file exists or was inspected. Do not call D0/D1 "verified code."
 
 ## `reuse-decisions.json`
 
@@ -54,7 +54,7 @@ For D2/D3, replace `pinned_commit` with a real full 40-character SHA verified at
 }
 ```
 
-Allowed `decision` values: `use_dependency_or_service`, `copy_or_adapt`, `port_or_translate`, `study_pattern_or_tests`, `defer`, `reject`. A `selected` decision must point to a D2/D3 record and real pinned SHA. A D0/D1 can be a `defer` or `reject`, or an unselected research lead, not a source-verified selection. `status` must be `selected`, `deferred`, or `rejected`, consistent with decision.
+Allowed `decision` values: `use_dependency_or_service`, `copy_or_adapt`, `port_or_translate`, `study_pattern_or_tests`, `defer`, `reject`. A `selected` decision must point to a D2/D3 record and real pinned SHA. `why` is a nonempty string; `upstream_files`, `not_proven`, and `possible_equivalence_checks` are nonempty string arrays. `upstream_files` and optional `upstream_tests` contain repository-relative file paths, not URLs or machine paths. Each listed file/test needs a matching pinned blob citation in the dossier. `upstream_tests` may be omitted or empty when no tests were found; record that gap in the dossier. A D0/D1 can be a `defer` or `reject`, or an unselected research lead, not a source-verified selection. `status` must be `selected`, `deferred`, or `rejected`, consistent with decision.
 
 **Legal caution:** A discovered public repo is not automatically licensed for reuse. An absent/unknown license precludes recommending copying code; language-porting could still be derivative. Record relevant file-level conditions and uncertainties rather than giving blanket legal approval.
 

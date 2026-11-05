@@ -63,7 +63,7 @@ A real requirement is not “create endpoint X”; it is “authorized actor per
 
 `READY` requires coverage of every essential journey and relevant variants, traceable restrictions, clear ownership of touched boundaries and verification of failure cases. If not ready, identify exactly what remains unknown; never conceal it to make implementation start. Do not weaken already accepted criteria. If implementation later discovers a missed essential behavior, reopen discovery and apply the repository's approved change/supersession process rather than rewriting history.
 
-Hand off the requirements dossier to `production-vertical-slice` or the repository's chosen implementation workflow. For a user who requested only research/specification, stop here. No code or production changes.
+Hand off the requirements dossier to the repository's chosen implementation workflow. `production-vertical-slice` is an optional integration if installed and permitted, not a dependency. For a user who requested only research/specification, stop here. No code or production changes.
 
 ## Red flags
 

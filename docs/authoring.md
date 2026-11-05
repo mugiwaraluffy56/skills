@@ -1,6 +1,6 @@
 # Authoring
 
-The `plan`, `implement`, `test`, `review`, and `ship` directories are empty placeholders, not installable skills. Each contains only `.gitkeep`. When implementing one, remove its `.gitkeep` and add a valid `SKILL.md` entry point. Additional skills use the same `skills/<name>/` layout.
+The collection contains `oss-reuse-atlas`, `feature-discovery`, `production-vertical-slice`, and `adversarial-acceptance`. Each has its own `SKILL.md` and self-contained supporting resources. The earlier empty placeholders have been removed. Additional skills use the same `skills/<name>/` layout.
 
 ## Format
 
@@ -27,7 +27,7 @@ Use a flat `skills/<name>/SKILL.md` layout. Both the skills CLI and Claude Code'
 
 ## Check
 
-Run `npm ci` once, then `npm run check`. Validation checks repository metadata, flat layout, frontmatter, unique names, and nonempty instructions. Directories containing only `.gitkeep` are allowed as placeholders and excluded from the skill count. Other incomplete skill directories fail validation. Symlinks are rejected for predictable distribution. This is a repository-specific structural check, not a full security audit or proof that an agent follows the instructions.
+Run `npm ci` once, then `npm run check` with Python 3.10+ installed. Validation checks repository metadata, flat layout, frontmatter, unique names, and nonempty instructions; tests cover both the Node tooling and atlas Python helper. Directories containing only `.gitkeep` are allowed as placeholders and excluded from the skill count. Other incomplete skill directories fail validation. Symlinks are rejected for predictable distribution. This is a repository-specific structural check, not a full security audit or proof that an agent follows the instructions.
 
 Before publishing a skill, test it in a disposable consumer project using the installation commands in the README. Verify discovery, invocation, linked resources, and any helpers on the agents you claim to support.
 

@@ -1,8 +1,6 @@
 # Repository instructions
 
-This repository distributes reusable agent skills, not an application. Keep the scaffold empty until the user explicitly requests adding or importing skills; examples in documentation are not permission to create sample skills.
-
-The user has requested empty `plan`, `implement`, `test`, `review`, and `ship` placeholders. Keep them as `.gitkeep`-only directories until their implementation is requested; they are not discoverable skills.
+This repository distributes reusable agent skills. The user has authorized the four engineering skills in `skills/`; add or import further skills only when requested. Examples in documentation are not permission to create sample skills. The earlier empty placeholders have been replaced by the real collection.
 
 ## Working rules
 
@@ -16,6 +14,6 @@ The user has requested empty `plan`, `implement`, `test`, `review`, and `ship` p
 
 ## Verification
 
-Use `npm ci` to install development dependencies and `npm run check` to validate metadata, skill structure, and validator tests. Run the checks after changes and report failures or checks you could not run.
+Use `npm ci` to install development dependencies and `npm run check` to validate metadata, skill structure, and Node/Python validator tests. Python 3.10+ is required for the test suite. Run the checks after changes and report failures or checks you could not run.
 
 An empty catalog passing validation means the scaffold is valid, not that there is anything to install. Structural checks do not establish live agent compatibility; test affected installation paths in a disposable consumer project when skills are available.

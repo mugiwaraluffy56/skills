@@ -9,7 +9,7 @@ description: "Implement complete observable software features across all actuall
 
 Turn accepted requirements into **working, testable, user-usable behavior** through every boundary needed for that feature. Avoid endpoint-only, visual-only, adapter-only and fixture-only implementations mistakenly called complete. Reuse existing architecture, tooling, CI and acceptance gates rather than imposing a new framework on every repository.
 
-Read project instructions and accepted specs first. If requirements are ambiguous, incomplete, or contain unjustified constraints, run `feature-discovery` before editing code. Use available `AGENTS.md`, existing task plans, accepted requirement IDs, named checks and gate tools. If they do not exist, keep a lightweight acceptance checklist in the project's established task location and avoid introducing a heavyweight gate unless the user requests one.
+Read project instructions and accepted specs first. If requirements are ambiguous, incomplete, or contain unjustified constraints, resolve discovery before editing code. If `feature-discovery` is installed and its use is permitted, it is an optional integration. Otherwise inspect adjacent code and primary documentation, map the actor-to-result journey and failure variants, identify constraints and consequential decisions, and agree observable acceptance criteria with the user. Stop implementation while essential decisions remain unresolved. Use available `AGENTS.md`, existing task plans, accepted requirement IDs, named checks and gate tools. If they do not exist, keep a lightweight acceptance checklist in the project's established task location and avoid introducing a heavyweight gate unless the user requests one.
 
 ## 1. Build a complete delivery map
 
@@ -46,7 +46,7 @@ After each slice:
 1. Run focused relevant tests and inspect assertions.
 2. Confirm the caller-to-effect-to-response path and precise failure behavior.
 3. Check changed contracts, dependent clients, migrations and existing user workflows.
-4. Check diff against original acceptance IDs; reopen `feature-discovery` for materially missed requirements. Never shrink accepted scope to fit the code.
+4. Check diff against original acceptance IDs; reopen discovery for materially missed requirements, using the standalone procedure above or an available discovery skill. Never shrink accepted scope to fit the code.
 5. Record exact commands, environment, source revision and truthful test result.
 
 For independent subagents, only parallelize work with unambiguous ownership and integration contracts; integrate and rerun authoritative checks in the controlling checkout. Do not silently commit, deploy, pay providers, modify production secrets or perform external actions beyond the user's authorization.
@@ -63,7 +63,7 @@ Produce a traceable ledger:
 
 `acceptance ID → code paths → actual observable result → test/check + assertions → source revision → evidence level → unresolved blocker`
 
-Invoke `adversarial-acceptance` with the **original request**, discovery, accepted scope, current diff, base revision and reproducible test/run instructions. The reviewer must challenge the actual user journey and originally supported variants. Repair issues without weakening the acceptance standard. Completion requires all applicable accepted criteria demonstrated; report separately: implemented, locally verified, independently reviewed and live/production qualified.
+If `adversarial-acceptance` is installed and permitted, use it with the **original request**, discovery, accepted scope, current diff, base revision and reproducible test/run instructions. Otherwise perform the same acceptance check directly: reconstruct the original journey and supported variants, trace each acceptance ID through the real system, run relevant positive/negative/recovery checks, and record defects separately from evidence gaps. Use an authorized independent reviewer when available; otherwise label the result **self-review**, not independent acceptance. Repair issues without weakening the acceptance standard. Completion requires all applicable accepted criteria demonstrated; report separately: implemented, locally verified, independently reviewed (or not independently reviewed), and live/production qualified. No sibling skill is required to complete this procedure.
 
 ## Failure conditions
 

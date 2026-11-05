@@ -17,7 +17,7 @@ Rebuild the user journey and major variants: setup, permissions, interaction, st
 
 Look for missing legitimate auth modes/formats, states, versions, provider/model capabilities, UI entrypoints, supported input sizes, connected subsystems, migrations and recovery semantics. Challenge numeric bounds, defaults, allowlists, timeouts and fallback logic. A test that asserts an invented `2048` cap is a regression in the wrong direction, not proof of good behavior. Identify the actual provenance and scope of every material constraint.
 
-If an essential requirement is missing, record a **scope defect**, refer back to `feature-discovery`, and follow the repo's approved spec-change process. Do not silently reclassify it as an optional improvement.
+If an essential requirement is missing, record a **scope defect** and follow the repo's approved spec-change process. Use `feature-discovery` only if installed and permitted; otherwise reconstruct the missing journey/variants from the original request and source evidence, propose observable criteria, and ask the user to resolve consequential scope choices before re-evaluating acceptance. No sibling skill is required. Do not silently reclassify the missing requirement as an optional improvement.
 
 ## 2. Trace and test actual running boundaries
 
