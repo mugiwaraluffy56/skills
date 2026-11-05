@@ -2,6 +2,7 @@
   "name": "personal-skills-tooling",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "npm@10.9.4",
   "type": "module",
   "description": "Development tooling for a personal agent skills repository",
   "repository": {
